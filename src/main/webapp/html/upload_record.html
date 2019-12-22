@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="./layui-master/src/css/layui.css"  media="all">
+		<link rel="stylesheet" type="text/css" href="./file/css/header.css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			table{
+				margin: 50px auto;
+				border: #000000 1px solid;
+				border-collapse: collapse;
+				margin: 300px auto;
+				margin-bottom: 100px;
+				text-align: center;
+			}
+			table th,td{
+				padding: 8px 10px;
+			  } 
+			a{
+				text-decoration:none;
+			}
+			a button{
+				border: none;
+				background-color: rgb(22,155,213);
+				color: white;
+				border-radius: 4px;
+				padding: 3px 10px;
+			}  
+		</style>
+	</head>
+	<body>
+		<!-- 页面导航栏 -->
+		<div id="header">
+			<ul class="layui-nav">
+			  <li class="layui-nav-item">
+				  <a href="./query.html">数据查询</a>
+			  </li>
+			  <li class="layui-nav-item"><a href="./data_download.html">数据下载</a></li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">数据上传</a>
+			    <dl class="layui-nav-child">
+				  <dd><a href="./upload_data.html">上传数据</a></dd>
+			      <dd><a href="./upload_record.html">上传记录</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">审核</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="./upload_check.html">上传审核</a></dd>
+			      <dd><a href="./download_check.html">下载审核</a></dd>
+			      <dd><a href="./register_check.html">注册审核</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">权限</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="./role_empower.html">角色授权</a></dd>
+			      <dd><a href="./jurisdiction_empower.html">权限授权</a></dd>
+			      <dd><a href="./data_empower.html">数据授权</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">用户名</a>
+			    <dl class="layui-nav-child">
+					<dd><a href="./persona_homepage.html">个人主页</a></dd>
+			      <dd><a href="">退出</a></dd>
+			    </dl>
+			  </li>
+			</ul>
+		</div>
+		
+		<div class="box">
+			<!-- 行内样式设置表格边框、单元格间距以及单元格对内容的内边距 -->
+			<table id="table" border="1" cellspacing="0">
+				<tr>
+					<th>数据名称</th>
+					<th>文件格式</th>
+					<th>字段</th>
+					<th>上传时间</th>
+				</tr>
+				<tr>
+					<td>ww</td>
+					<td>txt</td>
+					<td>
+					   <a href="#">
+						  <button class="download">查看</button>
+					   </a>
+					</td>
+					<td>2019-12-08</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	
+	<script src="./layui-master/src/layui.js" charset="utf-8"></script>
+	<script src="./file/js/header.js"></script>
+	</body>
+</html>

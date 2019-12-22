@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./layui-master/src/css/layui.css"  media="all">
+  <link rel="stylesheet" href="./file/css/header.css" rel="stylesheet">
+  <style type="text/css">
+	.aggree{
+		color: white;
+		background: rgb(0,150,136);
+		border: none;
+		padding: 1px 4px;
+		font-size: 14px;
+		border-radius: 2px;
+	}
+	.rejuct{
+		color: white;
+		background: rgb(255,87,34);
+		border: none;
+		padding: 1px 4px;
+		font-size: 14px;
+		border-radius: 2px;
+		margin-left: 10px;
+	}
+	#map_box{
+		width: 100%;
+		height: 100%;
+		background: rgba(52,35,64,0.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 999;
+	}
+	#table{
+		width: 500px;
+		height: 300px;
+		margin: 100px auto;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 999;
+		background: white;
+		margin-left: -250px;
+		margin-top: -150px;
+	}
+   </style>
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+  <!-- 网页头部导航条 -->
+  <div class="layui-header">
+	<!-- 网页头部左侧-页面logo -->
+    <div class="layui-logo">
+		<h2>移动大数据云平台</h2>
+		<p>MobileBigData_CloudPlatform</p>
+	</div>
+	<!-- 网页头部右侧-用户信息及退出 -->
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          欢迎你！<span id="username">贤心</span>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">用户信息</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退出</a></li>
+    </ul>
+  </div>
+  
+  <!-- 网页左侧导航条 -->
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+  			<li class="layui-nav-item"><a class="glyphicon glyphicon-search" href="./query.html">&nbsp;数据查询</a></li>
+  				  <li class="layui-nav-item"><a class="glyphicon glyphicon-download-alt" href="./data_download.html">&nbsp;数据下载</a></li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-open" href="javascript:;">&nbsp;数据上传</a>
+          <dl class="layui-nav-child">
+            <dd><a href="./upload_data.html">上传数据</a></dd>
+            <dd><a href="./upload_record.html">上传记录</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-list-alt" href="javascript:;">&nbsp;审核处理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="./upload_check.html">上传审核</a></dd>
+            <dd><a href="./download_check.html">下载审核</a></dd>
+            <dd><a href="./register_check.html">注册审核</a></dd>
+          </dl>
+        </li>
+  				<li class="layui-nav-item">
+  				  <a class="glyphicon glyphicon-file" href="javascript:;">&nbsp;权限管理</a>
+  				  <dl class="layui-nav-child">
+  				    <dd><a href="./role_empower.html">角色授权</a></dd>
+  				    <dd><a href="./jurisdiction_empower.html">权限授权</a></dd>
+  				    <dd><a href="./data_empower.html">数据授权</a></dd>
+  				  </dl>
+  				</li>
+  				<li class="layui-nav-item">
+  				  <a class="glyphicon glyphicon-user" href="javascript:;">&nbsp;关于用户</a>
+  				  <dl class="layui-nav-child">
+  				    <dd><a href="./persona_homepage.html">个人主页</a></dd>
+  				    <dd><a href="./login.html">注销退出</a></dd>
+  				  </dl>
+  				</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 网页主体内容 -->
+  <div class="layui-body">
+  <!-- 内容主体区域 -->
+  <div style="padding: 15px;">
+		<div class="layui-form">
+		  <table class="layui-table" id="table_box">
+		    <colgroup>
+		      <col width="100">
+		      <col width="200">
+		      <col width="150">
+		      <col width="100">
+			  <col width="150">
+		    </colgroup>
+		    <thead>
+		      <tr>
+				<th>申请人</th> 
+		        <th>上传字段</th>
+		        <th>上传时间</th>
+		        <th>数据</th>
+		        <th>操作</th>
+		      </tr> 
+		    </thead>
+		    <tbody id="tab_body">
+		      <tr>
+		        <td>陈明</td>
+				<td></td>
+		        <td>2019-10-29</td>
+		        <td>
+					<button type="button" class="see_data">查看数据</button>
+				</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		      <tr>
+				<td>李红</td>
+				<td></td>
+				<td>2019-10-29</td>
+				<td>
+					<button type="button" class="see_data">查看数据</button>
+				</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		      <tr>
+				<td>王昂</td>
+				<td></td>
+				<td>2019-10-29</td>
+				<td>
+					<button type="button" class="see_data">查看数据</button>
+				</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		      <tr>
+				<td>刘春</td>
+				<td></td>
+				<td>2019-10-29</td>
+				<td>
+					<button type="button" class="see_data">查看数据</button>
+				</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+  </div>
+</div>
+</div>
+
+<div id="map_box" style="display: none;">
+	<div id="table"></div>	
+</div>
+<script src="./layui-master/src/layui.js" charset="utf-8"></script>
+<script src="file/jquery-1.11.3.min.js"></script>
+<script>
+	//(1)JavaScript代码区域
+	layui.use('element', function(){
+	  var element = layui.element;
+	});
+	
+	$('.see_data').click(function(){
+		$('#map_box').css({'display':'block'})
+	})
+</script>
+</body>
+</html>
+

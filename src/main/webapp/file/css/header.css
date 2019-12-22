@@ -1,0 +1,35 @@
+		 	*{
+				padding: 0;
+				margin: 0;
+			}
+			.layui-header{
+				height: 90px;
+				background: rgb(47,64,80)!important;
+			}
+			.layui-logo{
+				width: 280px!important;
+				margin-left: 20px;
+				position: relative;
+			}
+			.layui-logo h2{
+				position: absolute;
+				top: 22px;
+				left: 30px;
+			}
+			.layui-logo p{
+				position: absolute;
+				top: 39px;
+				left: 42px;
+			}
+			.layui-layout-right{
+				top: 20px;
+			}
+			.layui-body{
+				margin-top: 30px;
+			}
+			.layui-nav-tree{
+				margin-top: 31px;
+			}
+			a{
+				text-decoration: none!important;
+			}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		#box{
+			width: 550px;
+			height: 500px;
+			box-shadow: 1px 1px 4px #2B669A;
+			overflow: hidden;
+			margin: 80px auto;
+			text-align: center;
+			font-size: 20px;
+			position: relative;
+		}
+		h3{
+			font-size: 40px;
+			margin-top: 20px;
+			margin-bottom: 40px;
+		}
+		#name,#password,#username,#phone_number,#department{
+			width: 200px;
+			height: 20px;
+			margin-bottom: 20px;
+		}
+		select#position{
+			width: 200px;
+			height: 20px;
+			margin-bottom: 20px;
+		}
+		#register_but,#login_but{
+			margin: 20px auto;
+			padding: 10px 50px;
+			border: 1px #000000 solid;
+			background-color: white;
+			border-radius: 4px;
+		}
+		#register_but:hover{
+			border: 1px white solid;
+			background-color: rgb(22,155,213);
+			color: white;
+		}
+		#tip{
+			font-size: 12px;
+			color: firebrick;
+			position: absolute;
+			top: 119px;
+			left: 411px;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<form name="login_form" method="post">
+		<h3>移动大数据云平台</h3>
+		账号：<input type="text" id="username" name="username" placeholder="请输入账户名" />
+		<p id="tip"></p><br/>
+		密码：<input type="password" id="password" name="password" /><br/>
+		岗位：<select id="position" name="position">
+	</select><br/>
+		部门：<input type="text" id="department" name="department" /><br/>
+		<input type="submit" id="register_but" name="register_but" value="注册" onclick="check_register()" />
+		<a href="../html/login.html"><button type="button" id="login_but">登陆</button></a>
+
+	</form>
+</div>
+
+<script src="../file/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	// 页面的下拉框自动加载后台数据
+	var xhr = new XMLHttpRequest();
+	xhr.open('post','../user/getPosition.do');
+	xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState==4&&xhr.status==200) {
+			var arr = JSON.parse(xhr.responseText);
+			console.log(arr);
+			for(var i=0;i<arr.length;i++){
+				var dom=document.createElement('option');
+				dom.value = arr[i];
+				dom.innerHTML = arr[i];
+				document.getElementById('position').appendChild(dom);
+				//dom.innerHTML = "";  //每循环一次，就清空一次html
+			}
+		}
+	};
+	xhr.send();
+
+	// 输入框失去焦点事件
+	$('#username').blur(function(){
+		//判断输入框是否有值
+		if ($(this).val()) {
+			$.ajax({
+				url:"../user/getUserName.do",
+				type:"get",
+				data:"username="+$(this).val(),
+				success:function(data){
+					var arr = JSON.parse(data);
+					if (arr.status=="1") {
+						$("#tip").fadeIn(1000).html("该账户已存在").fadeOut(2000);
+					}
+				}
+			})
+		} else{
+			$("#tip").fadeIn(1000).html("用户名不能为空！！").fadeOut(2000);
+		}
+	})
+
+	function check_register(){
+		var name = $("#username").val();
+		var pass = $("#password").val();
+		var posi = $("#position").val();
+		var depa = $("#department").val();
+		if(name!="" && pass!="" && posi != ""&& depa != "")
+		{
+			var json = {};
+			json.password = pass;
+			json.username = name;
+			json.position = posi;
+			json.department = depa;
+			$.ajax({
+				url:"../user/register.do",
+				type:"post",
+				async:false,
+				data:json,
+				dataType:"json",
+				success:function(msg){
+					console.log(msg);
+					if(msg.status==1){
+						alert("注册成功，等待审核！");
+						window.location.href="../html/test.html";
+					}else{
+						alert(msg.msg);
+						$("#login_form").removeClass('shake_effect');
+						setTimeout(function()
+						{
+							$("#login_form").addClass('shake_effect')
+						},1);
+					}
+				},
+				error:function(){
+					alert("系统繁忙，请稍后再试");
+					$("#login_form").removeClass('shake_effect');
+					setTimeout(function()
+					{
+						$("#login_form").addClass('shake_effect')
+					},1);
+				}
+			});
+		}
+		else
+		{
+			alert("请填写注册所需完整信息");
+			location.href="../html/test.html";
+
+			$("#login_form").removeClass('shake_effect');
+			setTimeout(function()
+			{
+				$("#login_form").addClass('shake_effect')
+			},1);
+		}
+	}
+</script>
+</body>
+</html>

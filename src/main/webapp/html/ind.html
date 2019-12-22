@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./layui-master/src/css/layui.css"  media="all">
+		<link rel="stylesheet" href="./file/css/query_download.css" />
+  <style type="text/css">
+   	*{
+		padding: 0;
+		margin: 0;
+	}
+	.layui-header{
+		height: 90px;
+		background: rgb(47,64,80)!important;
+	}
+	.layui-logo{
+		width: 280px!important;
+		margin-left: 20px;
+		position: relative;
+	}
+	.layui-logo h2{
+		position: absolute;
+		top: 22px;
+		left: 30px;
+	}
+	.layui-logo p{
+		position: absolute;
+		top: 39px;
+		left: 42px;
+	}
+	.layui-layout-right{
+		top: 20px;
+	}
+	.layui-body{
+		margin-top: 30px;
+	}
+	.layui-nav-tree{
+		margin-top: 31px;
+	}
+	a{
+		text-decoration: none!important;
+	}
+   </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <!-- 网页头部导航条 -->
+  <div class="layui-header">
+	<!-- 网页头部左侧-页面logo -->
+    <div class="layui-logo">
+		<h2>移动大数据云平台</h2>
+		<p>MobileBigData_CloudPlatform</p>
+	</div>
+	<!-- 网页头部右侧-用户信息及退出 -->
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          欢迎你！<span id="username">贤心</span>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">用户信息</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退出</a></li>
+    </ul>
+  </div>
+  
+  <!-- 网页左侧导航条 -->
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+		  <li class="layui-nav-item"><a class="glyphicon glyphicon-search" href="">&nbsp;数据查询</a></li>
+		  <li class="layui-nav-item"><a class="glyphicon glyphicon-download-alt" href="">&nbsp;数据下载</a></li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-open" href="javascript:;">&nbsp;数据上传</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">上传数据</a></dd>
+            <dd><a href="javascript:;">上传记录</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-list-alt" href="javascript:;">&nbsp;审核处理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">上传审核</a></dd>
+            <dd><a href="javascript:;">下载审核</a></dd>
+            <dd><a href="javascript:;">注册审核</a></dd>
+          </dl>
+        </li>
+		<li class="layui-nav-item">
+		  <a class="glyphicon glyphicon-file" href="javascript:;">&nbsp;权限管理</a>
+		  <dl class="layui-nav-child">
+		    <dd><a href="javascript:;">角色授权</a></dd>
+		    <dd><a href="javascript:;">权限授权</a></dd>
+		    <dd><a href="javascript:;">数据授权</a></dd>
+		  </dl>
+		</li>
+		<li class="layui-nav-item">
+		  <a class="glyphicon glyphicon-user" href="javascript:;">&nbsp;关于用户</a>
+		  <dl class="layui-nav-child">
+		    <dd><a href="javascript:;">个人主页</a></dd>
+		    <dd><a href="javascript:;">注销退出</a></dd>
+		  </dl>
+		</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 网页主体内容 -->
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">世界的包管理器。NPM 可以让</div>
+  </div>
+  
+  <!-- 网页尾部内容 -->
+  <div class="layui-footer"></div>
+</div>
+<script src="./layui-master/src/layui.js" charset="utf-8"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+});
+</script>
+</body>
+</html>

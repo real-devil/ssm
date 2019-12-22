@@ -1,0 +1,22 @@
+[{
+	"idStr":"10086",
+	"username":"马云",
+	"position":"老板",
+	"department":"阿里巴巴",
+	"statusStr":"黄金"
+  },
+  {
+	"idStr":"10097",
+	"username":"刘强东",
+	"position":"股东",
+	"department":"京东",
+	"statusStr":"青铜"
+  },
+  {
+	"idStr":"10056",
+	"username":"马化腾",
+	"position":"董事长",
+	"department":"腾讯集团",
+	"statusStr":"白银"
+  }
+]

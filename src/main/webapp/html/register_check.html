@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../layui-master/src/css/layui.css"  media="all">
+  <link rel="stylesheet" href="../file/css/query_download.css" />
+		<link rel="stylesheet" href="../file/css/header.css" rel="stylesheet">
+  <style type="text/css">
+	a{
+		text-decoration: none!important;
+	}
+	.aggree{
+		color: white;
+		background: rgb(0,150,136);
+		border: none;
+		padding: 1px 4px;
+		font-size: 14px;
+		border-radius: 2px;
+	}
+	.rejuct{
+		color: white;
+		background: rgb(255,87,34);
+		border: none;
+		padding: 1px 4px;
+		font-size: 14px;
+		border-radius: 2px;
+		margin-left: 10px;
+	}
+   </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <!-- 网页头部导航条 -->
+  <div class="layui-header">
+	<!-- 网页头部左侧-页面logo -->
+    <div class="layui-logo">
+		<h2>移动大数据云平台</h2>
+		<p>MobileBigData_CloudPlatform</p>
+	</div>
+	<!-- 网页头部右侧-用户信息及退出 -->
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          欢迎你！<span id="username">贤心</span>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">用户信息</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退出</a></li>
+    </ul>
+  </div>
+  
+  <!-- 网页左侧导航条 -->
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+		  <li class="layui-nav-item"><a class="glyphicon glyphicon-search" href="">&nbsp;数据查询</a></li>
+		  <li class="layui-nav-item"><a class="glyphicon glyphicon-download-alt" href="">&nbsp;数据下载</a></li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-open" href="javascript:;">&nbsp;数据上传</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">上传数据</a></dd>
+            <dd><a href="javascript:;">上传记录</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-list-alt" href="javascript:;">&nbsp;审核处理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="./upload_check.html">上传审核</a></dd>
+            <dd><a href="javascript:;">下载审核</a></dd>
+            <dd><a href="./register_check.html">注册审核</a></dd>
+          </dl>
+        </li>
+		<li class="layui-nav-item">
+		  <a class="glyphicon glyphicon-list-alt" href="javascript:;">&nbsp;权限管理</a>
+		  <dl class="layui-nav-child">
+		    <dd><a href="javascript:;">角色授权</a></dd>
+		    <dd><a href="./jurisdiction_empower.html">权限授权</a></dd>
+		    <dd><a href="javascript:;">数据授权</a></dd>
+		  </dl>
+		</li>
+		<li class="layui-nav-item">
+		  <a class="glyphicon glyphicon-user" href="javascript:;">&nbsp;关于用户</a>
+		  <dl class="layui-nav-child">
+		    <dd><a href="javascript:;">个人主页</a></dd>
+		    <dd><a href="javascript:;">注销退出</a></dd>
+		  </dl>
+		</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 网页主体内容 -->
+  <div class="layui-body">
+  <!-- 内容主体区域 -->
+  <div style="padding: 15px;">
+		<div class="layui-form">
+		  <table class="layui-table" id="table_box">
+		    <colgroup>
+		      <col width="100">
+		      <col width="150">
+		      <col width="200">
+		      <col width="100">
+		      <col width="100">
+			  <col width="150">
+		    </colgroup>
+		    <thead>
+		      <tr>
+				<th>ID号</th> 
+		        <th>姓名</th>
+		        <th>岗位</th>
+		        <th>部门</th>
+				<th>状态</th>
+		        <th>审核</th>
+		      </tr> 
+		    </thead>
+		    <tbody id="tab_body">
+		      <tr>
+				<td class="id">1001</td>  
+		        <td>陈明</td>
+		        <td>董事长</td>
+		        <td>市场部</td>
+				<td>未审核</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		      <tr>
+				<td class="id">1002</td>  
+		        <td>张玲</td>
+		        <td>老板娘</td>
+		        <td>营销部</td>
+				  <td>未审核</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		      <tr>
+				<td class="id">1003</td>  
+		        <td>王刚</td>
+		        <td>部门领导</td>
+		        <td>市场部</td>
+				  <td>未审核</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		      <tr>
+				<td class="id">1004</td>  
+		        <td>张三</td>
+		        <td>部门销售</td>
+		        <td>营销部</td>
+				  <td>未审核</td>
+				<td>
+					<input type="button" value="同意" class="aggree" />
+					<input type="button" value="拒绝" class="rejuct" />
+				</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+  </div>
+</div>
+</div>
+
+<script src="../layui-master/src/layui.js" charset="utf-8"></script>
+<script src="../file/jquery-1.11.3.min.js"></script>
+<script>
+		//(1)JavaScript代码区域
+		layui.use('element', function(){
+		  var element = layui.element;
+		});
+
+		// (2)ajax加载数据到页面上去
+		var xhr = new XMLHttpRequest();
+		xhr.open('get','../user/getStatus.do');
+		// xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState==4&&xhr.status==200) {
+				var arr = JSON.parse(xhr.responseText);
+				var html = "";
+				for(var i=0;i<arr.length;i++){
+					html += '<td class="id">'+arr[i].idStr+'</td>';
+					html += '<td>'+arr[i].username+'</td>';
+					html += '<td>'+arr[i].position+'</td>';
+					html += '<td>'+arr[i].department+'</td>';
+					html += '<td>'+arr[i].statusStr+'</td>';
+					html += '<td><input type="button" value="同意" class="aggree" /><input type="button" value="拒绝" class="rejuct" /></td>';
+
+					var m = document.createElement("tr");
+					m.innerHTML = html;
+					document.getElementById('tab_body').appendChild(m);
+					html = "";  //每循环一次，就清空一次html
+				}
+			}	
+		}
+		xhr.send();
+		
+		
+		//(3)jQuery发送ajax请求,同意和拒绝按钮
+		$("#table_box").on("click", ".aggree:button", function(event){
+        	var id = $(this).closest("tr").find("td").eq(0).text();
+			var position = $(this).closest("tr").find("td").eq(3).text();
+
+			$.ajax({
+				url:"../user/setStatus.do",
+				type:"get",
+				data:"id="+id+"position="+position+"&status=1",
+				success:function(data){
+					console.log(data);
+					alert("nihao");
+					window.location.href="../html/test.html";
+				}
+			})
+    	});
+		
+		$("#table_box").on("click", ".rejuct:button", function(event){
+			var id = $(this).closest("tr").find("td").eq(0).text();
+			$.ajax({
+				url:"../user/setStatus.do",
+				type:"get",
+				data:"id="+id+"&status=0",
+				success:function(data){
+					console.log(data);
+				}
+			})
+		})
+</script>
+</body>
+</html>

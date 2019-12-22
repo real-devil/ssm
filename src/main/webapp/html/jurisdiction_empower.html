@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./layui-master/src/css/layui.css"  media="all">
+		<link rel="stylesheet" href="./file/css/header.css" rel="stylesheet">
+		<style type="text/css">
+			.checkss input{
+				margin-left: 10px;
+			}
+			button{
+				border: none;
+				background-color: rgb(22,155,213);
+				color: white;
+				border-radius: 4px;
+				padding: 3px 10px;
+				margin-left: 10px;
+			}
+			#table_box{
+				text-align: center;
+			}
+			 tr th{
+				 background: rgb(0,150,136);
+				 color: white;
+				 text-align: center!important;
+			 } 
+			input[type="checkbox"]{
+				display: inline-block!important;
+				margin-left: 20px;
+			}
+			#mask{
+				width: 100%;
+				height: 100%;
+				background: rgba(57,61,73,0.5);
+				z-index: 999;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#mask .mark_box{
+				width: 400px;
+				height: 200px;
+				margin: 100px auto;
+				border-radius: 8px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				z-index: 999;
+				background: white;
+				margin-left: -100px;
+				margin-top: -100px;
+			}
+			.mark_box #header{
+				width: 400px;
+				height: 50px;
+				background: rgb(28,106,105);
+				border-top-left-radius: 8px;
+				border-top-right-radius: 8px;
+			}
+			.anv_fuxuan{
+				margin-top: 20px!important;
+				margin-bottom: 20px!important;
+			}
+			from{
+				font-size: 17px;
+			}
+			#role_name{
+				margin-top: 25px;
+			}
+			#enter{
+				margin-left: 90px;
+				padding: 6px 15px;
+			}
+			#cancel{
+				margin-left: 85px;
+				padding: 6px 15px;
+			}
+		 </style>
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+		   <!-- 网页头部导航条 -->
+		   <div class="layui-header">
+				<!-- 网页头部左侧-页面logo -->
+				<div class="layui-logo">
+					<h2>移动大数据云平台</h2>
+					<p>MobileBigData_CloudPlatform</p>
+				</div>
+				<!-- 网页头部右侧-用户信息及退出 -->
+				<ul class="layui-nav layui-layout-right">
+				  <li class="layui-nav-item">
+					<a href="javascript:;">
+					  欢迎你！<span id="username">贤心</span>
+					</a>
+					<dl class="layui-nav-child">
+					  <dd><a href="">用户信息</a></dd>
+					</dl>
+				  </li>
+				  <li class="layui-nav-item"><a href="">退出</a></li>
+				</ul>
+		  </div>
+		  
+		   <!-- 网页左侧导航条 -->
+		   <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+  			<li class="layui-nav-item"><a class="glyphicon glyphicon-search" href="./query.html">&nbsp;数据查询</a></li>
+  				  <li class="layui-nav-item"><a class="glyphicon glyphicon-download-alt" href="./data_download.html">&nbsp;数据下载</a></li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-open" href="javascript:;">&nbsp;数据上传</a>
+          <dl class="layui-nav-child">
+            <dd><a href="./upload_data.html">上传数据</a></dd>
+            <dd><a href="./upload_record.html">上传记录</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a class="glyphicon glyphicon-list-alt" href="javascript:;">&nbsp;审核处理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="./upload_check.html">上传审核</a></dd>
+            <dd><a href="./download_check.html">下载审核</a></dd>
+            <dd><a href="./register_check.html">注册审核</a></dd>
+          </dl>
+        </li>
+  				<li class="layui-nav-item">
+  				  <a class="glyphicon glyphicon-file" href="javascript:;">&nbsp;权限管理</a>
+  				  <dl class="layui-nav-child">
+  				    <dd><a href="./role_empower.html">角色授权</a></dd>
+  				    <dd><a href="./jurisdiction_empower.html">权限授权</a></dd>
+  				    <dd><a href="./data_empower.html">数据授权</a></dd>
+  				  </dl>
+  				</li>
+  				<li class="layui-nav-item">
+  				  <a class="glyphicon glyphicon-user" href="javascript:;">&nbsp;关于用户</a>
+  				  <dl class="layui-nav-child">
+  				    <dd><a href="./persona_homepage.html">个人主页</a></dd>
+  				    <dd><a href="./login.html">注销退出</a></dd>
+  				  </dl>
+  				</li>
+      </ul>
+    </div>
+  </div>
+		  
+		   <!-- 网页主体内容 -->
+		   <div class="layui-body">
+		   <!-- 内容主体区域 -->
+		   <div style="padding: 15px;">
+				<div class="layui-form">
+				   <table class="layui-table" id="table_box">
+						<colgroup>
+						  <col width="100">
+						  <col width="150">
+						  <col width="150">
+						</colgroup>
+						<thead>
+						  <tr>
+							<th>角色</th> 
+							<th>权限管理</th>
+							<th>授权操作</th>
+						  </tr> 
+						</thead>
+						<tbody id="tab_body">
+						  <tr>
+							<td>市场部领导</td>
+							<td class="checkss">
+								<input type="checkbox" name="self_query" value="自助查询"/>&nbsp;自助查询
+								<input type="checkbox" name="query_result" value="查询结果"/>&nbsp;查询结果
+								<input type="checkbox" name="upload_data" value="上传数据"/>&nbsp;上传数据
+							</td>
+							<td>
+							   <button class="ent_Juris">确认授权</button>
+							   <button class="del_role">删除角色</button>
+							</td>
+						  </tr>
+						  <tr>
+							<td>营销部领导</td>
+							<td class="checkss">
+								<input type="checkbox" name="self_query" value="自助查询"/>&nbsp;自助查询
+								<input type="checkbox" name="query_result" value="查询结果"/>&nbsp;查询结果
+								<input type="checkbox" name="upload_data" value="上传数据"/>&nbsp;上传数据
+							</td>
+							<td>
+							   <button class="ent_Juris">确认授权</button>
+							   <button class="del_role">删除角色</button>
+							</td>
+						  </tr>
+						  <tr id="news">
+							<td>
+								<button class="download" id="add_role">增加角色</button>
+							</td>
+							<td></td>
+							<td></td>
+						  </tr>
+						</tbody>
+		            </table>					
+				</div>
+		    </div>
+
+	    </div>
+		<!-- 页面遮罩层 -->
+		<div id="mask" style="display: none;">
+			<div class="mark_box">
+				<div id="header"></div>
+				<from>
+					&nbsp;&nbsp;&nbsp;
+					角色名称：<input type="text" id="role_name" placeholder="请输入要添加的角色名称" /><br>
+					<input type="checkbox" class="anv_fuxuan" value="自助查询"/>&nbsp;自助查询
+					<input type="checkbox" class="anv_fuxuan" value="查询结果"/>&nbsp;查询结果
+					<input type="checkbox" class="anv_fuxuan" value="上传数据"/>&nbsp;上传数据
+					<br>
+					<button type="button" id="enter">确定</button>
+					<button type="button" id="cancel">取消</button>
+				</from>
+			</div>
+		</div>
+		
+	<script src="./layui-master/src/layui.js" charset="utf-8"></script>
+	<script src="file/jquery-1.11.3.min.js"></script>
+	<script src="./file/js/header.js"></script>
+	<script type="text/javascript">
+		// (1)ajax加载数据到页面上去
+		var xhr = new XMLHttpRequest();
+		xhr.open('post','./j_empower.php');
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState==4&&xhr.status==200) {
+				var arr = JSON.parse(xhr.responseText);
+				var html = "";
+				
+				for(var i=0;i<arr.length;i++){
+					html += '<td>'+arr[i].position+'</td>';
+					html += '<td class="checkss"><input type="checkbox" name="self_query" value="自助查询"/>&nbsp;自助查询<input type="checkbox" name="query_result" value="查询结果"/>&nbsp;查询结果<input type="checkbox" name="upload_data" value="上传数据"/>&nbsp;上传数据</td>';
+					html += '<td><button class="ent_Juris">确认授权</button><button class="del_role">删除角色</button></td>';
+
+					var m = document.createElement("tr")
+					m.innerHTML = html;
+					var news = document.getElementById('news');
+					document.getElementById('tab_body').insertBefore(m,news);
+					html = "";  //每循环一次，就清空一次html
+				}
+				
+				//(2)确认授权
+				$('.ent_Juris').click(function(){
+					var role_name = $(this).closest("tr").find("td").eq(0).text();		
+					var checkID = [];//定义一个空数组 
+					// //把所有被选中的复选框的值存入数组
+					$(this).closest("tr").find("td input[type='checkbox']:checked").each(function(i){
+						checkID[i] =$(this).val();
+					});
+					
+					$.ajax({
+						url: "./juris_em.php",
+						type: "get",
+						data: "role="+role_name+"&Jurisdiction="+checkID+"&state="+1,
+						success: function(data){
+							console.log(data);
+						}
+					})
+				})
+				
+				//(3)删除角色
+				$('.del_role').click(function(){
+					var role_name = $(this).closest("tr").find("td").eq(0).text();
+					var checkID = [];//定义一个空数组 
+					// //把所有被选中的复选框的值存入数组
+					$(this).closest("tr").find("td input[type='checkbox']:checked").each(function(i){
+						checkID[i] =$(this).val();
+					});
+					
+					$.ajax({
+						url: "./juris_em.php",
+						type: "get",
+						data: "role="+role_name+"&Jurisdiction="+checkID+"&state="+0,
+						success: function(data){
+							console.log(data);
+						}
+					})
+				})
+			}	
+		}
+		xhr.send();
+		
+		
+		//(4)点击 增加角色按钮 弹出模态框并发送ajax把数据加载到模态框
+		$("#add_role").click(function(){
+			$("#mask").css({'display':'block'});
+		})
+		
+		// 点击模态框 确认按钮,发送ajax请求到后台
+		$('#enter').click(function(){
+			var checkID = [];//定义一个空数组 
+			// //把所有被选中的复选框的值存入数组
+			$("input[type='checkbox']:checked").each(function(i){
+				checkID[i] =$(this).val();
+			});
+			$.ajax({
+				url: "./juris_em.php",
+				type: "get",
+				data: "role="+$('#role_name').val()+"&Jurisdiction="+checkID,
+				success: function(data){
+					console.log(data);
+				}
+			})
+		})
+		// 点击模态框 取消按钮,隐藏模态框
+		$('#cancel').click(function(){
+			$("#mask").css({'display':'none'});
+		})
+		
+		
+		
+		
+	</script>
+	</body>
+</html>

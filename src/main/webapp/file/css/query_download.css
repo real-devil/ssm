@@ -1,0 +1,66 @@
+*{
+	padding: 0;
+	margin: 0;
+  }
+  
+.box,.box_2{
+	position: relative;
+  }
+ .box{
+	 top: -154px;
+ }
+#table{
+	margin: 50px auto;
+	border: #000000 1px solid;
+	border-collapse: collapse;
+	margin: 300px auto;
+	margin-bottom: 100px;
+  }
+  
+#table th,td{
+	padding: 15px 100px;
+  } 
+  
+button{
+	 border: none;
+	 background-color: rgb(22,155,213);
+	 color: white;
+	 border-radius: 4px;
+ }
+ /* 查询结果页面的按钮效果 */
+.download_but{
+	padding: 10px 50px;
+	position: absolute;
+	top: 160px;
+	left: 813px;
+ }
+ /* 下载记录页面的按钮效果 */
+.download{
+	 padding: 5px 30px;
+ }
+ 
+ /* 下载审核申请 */
+.box_2{
+ 	width: 550px;
+	height: 500px;
+ 	margin: 100px auto;
+	margin-bottom: 0;
+ 	font-size: 25px;
+	font-weight: 400;
+ }
+select,textarea,#apply{
+	 font-size: 18px;
+	 font-weight: normal;
+ }
+select{
+ 	width: 230px;
+ 	height: 30px;
+ 	margin-bottom: 20px;
+ }
+/* 下载审核申请按钮 */
+#apply{
+ 	padding: 10px 50px;
+ 	position: absolute;
+ 	top: 334px;
+ 	left: 313px;
+ }

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="./layui-master/src/css/layui.css"  media="all">
+		<link rel="stylesheet" type="text/css" href="./file/css/header.css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			table{
+				margin: 50px auto;
+			}
+			a{
+
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 页面导航栏 -->
+		<div id="header">
+			<ul class="layui-nav">
+			  <li class="layui-nav-item">
+				  <a href="./query.html">数据查询</a>
+			  </li>
+			  <li class="layui-nav-item"><a href="./data_download.html">数据下载</a></li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">数据上传</a>
+			    <dl class="layui-nav-child">
+				  <dd><a href="./upload_data.html">上传数据</a></dd>
+			      <dd><a href="./upload_record.html">上传记录</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">审核</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="./upload_check.html">上传审核</a></dd>
+			      <dd><a href="./download_check.html">下载审核</a></dd>
+			      <dd><a href="./register_check.html">注册审核</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">权限</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="./role_empower.html">角色授权</a></dd>
+			      <dd><a href="./jurisdiction_empower.html">权限授权</a></dd>
+			      <dd><a href="./data_empower.html">数据授权</a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			    <a href="javascript:;">用户名</a>
+			    <dl class="layui-nav-child">
+					<dd><a href="./persona_homepage.html">个人主页</a></dd>
+			      <dd><a href="">退出</a></dd>
+			    </dl>
+			  </li>
+			</ul>
+		</div>
+		
+		<table border="" cellspacing="" cellpadding="">
+		  <tbody id="tab">
+		  	<tr>
+				<th><input name="ids" type="checkbox" id="i_check" value="全选"></th>
+				<th class="sorting_asc">ID</th>
+				<th class="sorting_desc">用户名</th>
+				<th class="sorting_asc sorting_asc_disabled">职位</th>
+				<th class="sorting_desc sorting_desc_disabled">岗位</th>
+				<th class="sorting">状态</th>
+				<th class="text-center">操作</th>
+			</tr>
+			<tr>
+				<td><input name="ids" type="checkbox" class="check"></td>
+				<td class="td_0">10047</td>
+				<td class="td_1">霍金</td>
+				<td class="td_2">科学家</td>
+				<td class="td_3">美国科技大学</td>
+				<td class="td_4">烂铁</td>
+				<td class="text-center">
+					<a href="#">详情</a>
+					<a href="#">添加角色</a>
+					<a href="#" class="agree">同意</a>
+					<a href="#">拒绝</a>
+				</td>
+			</tr>
+		  </tbody>	
+		</table>
+		<input type="button" name="but" value="批量同意" id="but"/>
+		
+	<script src="./layui-master/src/layui.js" charset="utf-8"></script>
+	<script src="./file/js/header.js"></script>	
+	<script src="./file/jquery-1.11.3.min.js"></script>	
+	<script type="text/javascript">
+		// （1）全选复选框的效果实现
+		document.getElementById("i_check").onclick = function(){
+		    var checked = document.getElementById("i_check").checked;
+		    var checkson = document.getElementsByName("ids");
+		    if(checked){
+		        for(var i = 0; i < checkson.length ;i++){
+		            checkson[i].checked = true;
+		        }
+		    }else{
+		        for(var i = 0; i < checkson.length ;i++){
+		            checkson[i].checked = false;
+		        }
+		    }
+		}
+		
+		// （2）第一次ajax请求
+		var xhr_1 = new XMLHttpRequest();
+		xhr_1.open('post','./file/data.php');
+		xhr_1.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+		xhr_1.onreadystatechange = function(){
+			if (xhr_1.readyState==4&&xhr_1.status==200) {
+				var arr = JSON.parse(xhr_1.responseText);
+				var html = "";
+				
+				for(var i=0;i<arr.length;i++){
+                    html += '<td><input name="ids" type="checkbox" class="check"></td>'
+					html += '<td class="td_0">'+arr[i].idStr+'</td>';
+					html += '<td class="td_1">'+arr[i].username+'</td>';
+					html += '<td class="td_2">'+arr[i].position+'</td>';
+					html += '<td class="td_3">'+arr[i].department+'</td>';
+					html += '<td class="td_4">'+arr[i].statusStr+'</td>';
+					html += '<td class="text-center"><a href="#">详情</a>'+'&nbsp'+
+					            '<a href="#">添加角色</a>'+'&nbsp'+
+					            '<a href="#" class="agree">同意</a>'+'&nbsp'+
+					            '<a href="#">拒绝</a></td>';
+
+					var m = document.createElement("tr")
+					m.innerHTML = html;
+					document.getElementById('tab').appendChild(m);
+					html = "";  //每循环一次，就清空一次html
+				}
+				//每个同意效果实现,要在回调函数里面执行，因为后台数据返回时，上面才可以生成tr元素，才可以被选中并赋予单击事件
+				//第三次ajax请求，单个同意效果实现
+				$('.agree').on('click', function() {
+					var ol = [];
+      				//循环遍历，去除每个
+      				for (var j = 0; j < 5; j++) {
+      					var userName = $(this).parents("tr").find(".td_"+j).text();
+      					ol.push(userName);	
+      				}
+      				console.log(ol);
+
+      				var xhr_3 = new XMLHttpRequest();
+					xhr_3.open('post','./file/test_2.php');
+					xhr_3.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+					xhr_3.onreadystatechange = function(){
+						if (xhr_3.readyState==4&&xhr_3.status==200) {
+							console.log(xhr_3.responseText);
+						}
+					}
+					xhr_3.send('job_num='+ol[0]+'&username='+ol[1]+'&job='+ol[2]+'&post='+ol[3]+'&state='+ol[4]); 
+		  		});
+			}	
+		}
+		xhr_1.send(null);
+
+
+		//（3）批量同意发送第二次ajax请求按钮效果实现
+		document.getElementById("but").onclick = function(){
+			var tbodyObj = document.getElementById('tab');
+			var m = [];
+			
+			//（3）each()遍历选择器选中的每一个checkbox元素
+        	$("table input[type=checkbox]").each(function(key,value){
+        		//如果该元素已被选中(除了第一行表头外)，则往下执行代码
+                if($(value).prop('checked')&&key>0){
+						var person = new Object();
+                		
+                		person.job_num=tbodyObj.rows[key].cells[1].innerHTML;
+						person.username=tbodyObj.rows[key].cells[2].innerHTML;
+						person.job=tbodyObj.rows[key].cells[3].innerHTML;
+						person.post=tbodyObj.rows[key].cells[4].innerHTML;
+						person.state=tbodyObj.rows[key].cells[5].innerHTML;
+						m.push(person);	
+            	}
+        	})
+        	var json_str = JSON.stringify(m);
+            var json_arr = JSON.parse(json_str);
+           	console.log(json_str);
+        	
+        	var xhr_2 = new XMLHttpRequest();
+			xhr_2.open('post','./file/test_1.php');
+			xhr_2.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			xhr_2.onreadystatechange = function(){
+				if (xhr_2.readyState==4&&xhr_2.status==200) {
+					console.log(xhr_2.responseText);
+				}
+			}
+			xhr_2.send('job_num='+json_arr[0].job_num+'&username='+json_arr[0].username+'&job='+json_arr[0].job+'&post='+json_arr[0].post+'&state='+json_arr[0].state); 
+    	}
+
+	</script>	
+	</body>
+</html>
